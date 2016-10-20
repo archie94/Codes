@@ -19,3 +19,12 @@ Codechef/SeptChallenge2016/a.out
 HackerRank/Contest/WorldCodeSprint7/a.out
 HackerRank/Contest/WeekOfCode23/a.out
 HackerRank/Algorithms/Constructive Algorithms/a.out
+
+# test case files
+*.in
+*.in.*
+*.out
+*.out.*
+
+# autosave files
+*~
