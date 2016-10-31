@@ -6,61 +6,64 @@
 
 using namespace std;
 
-vector<int> g[100001];
+#define N 100001
+#define M 10001
+#define INF 1000ll*1000ll*1000ll*1000ll*1000ll
 
-int lca(int current, int food_node) {
-	vector<int> path_current;
-	vector<int> path_food_node;
+typedef long long ll;
 
-	int start=1;
-	int row=0;
-	path_current.push_back(start);
+vector<int> rests[M];
+ll dp[N]; // answer will be sum of least distance per query.
 
+/*
+ * Calc dist by making u=v ultimately.
+ * Divide the greater of u and v by 2 and add 1 to dist (since we are going up a level)
+ */
+int calcDist(int u, int v) {
+	if(u==v) return 0;
 
+	if(u<v) return calcDist(u,v/2)+1;
+	return calcDist(u/2,v)+1;
 }
 
 int main() {
 	int n,m,q;
+	int rest;
 	cin>>n>>m>>q;
-	int food[m+1][11];
-	for(int i=1;i<=m;i++) {
-		cin>>food[i][0];
-		for(int j=1;j<=food[i][0];j++) cin>>food[i][j];
-	}
-
-	int child=n;
-	while(child>=1) {
-		int parent=child/2;
-		g[parent].push_back(child);
-		child--;
-	}
-
-	int time=0;
-	int current=1;
-
-	
-	for(int i=0;i<q;i++) {
-		int f,p;
-		cin>>f>>p;
-		
-		int anc=lca(current, food[f][1]);
-		for(int j=2;j<=food[f][0];j++) {
-			int nanc=lca(current, food[f][i]);
-			anc=findMinTime(p, anc, nanc);
+	for(int i=0;i<m;i++) {
+		cin>>rest; // no of restaurants that make food of type i+1
+		for(int j=0;j<rest;j++) {
+			int r;
+			cin>>r;
+			rests[i+1].push_back(r);
 		}
+	}
 
-		time+=findTime(current, anc);
-		time+=findTime(anc, p);
-	}
-	
-	/*
-	for(int i=1;i<=n;i++) {
-		for(int j=0;j<g[i].size();j++) {
-			cout<<g[i][j]<<" ";
+	int currNode, prevNode, foodNode;
+	int foodType;
+
+	prevNode=1;
+	dp[0]=0;
+	for(int i=1;i<=q;i++) {
+		cin>>foodType>>currNode;
+		dp[i]=INF;
+
+		for(int j=0;j<rests[foodType].size();j++) {
+			foodNode=rests[foodType][j];
+
+			int new_dp=dp[i-1]+calcDist(prevNode, foodNode)+calcDist(foodNode, currNode);
+			/*
+			 * For the ith query we need to consider the foodNode which will contribute the least distance
+			 * the least distance + the distance of previous query will make answer for the current query
+			 */
+			if(dp[i]>new_dp) {
+				dp[i]=new_dp;
+			}
 		}
-		cout<<endl;
+		prevNode=currNode;
 	}
-	*/
-	cout<<time<<endl;
+
+	cout<<dp[q]<<endl;
 	return 0;
 }
+
