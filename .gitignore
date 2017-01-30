@@ -1,25 +1,3 @@
-HackerRank/Algorithms/Dynamic Programming/a.out
-HackerRank/Contest/May World CodeSprint/a.out
-HackerRank/Algorithms/Greedy/a.out
-.gitignore~
-HackerRank/Algorithms/Bit Manipulation/a.out
-HackerRank/Algorithms/Strings/a.out
-HackerRank/Algorithms/Search/a.out
-HackerRank/Algorithms/Sorting/a.out
-HackerRank/Contest/ Zalando CodeSprint/a.out
-SPOJ/a.out
-HackerRank/Contest/WeekOfCode22/a.out
-HackerRank/Contest/Week of Code-21/a.out
-HackerRank/Contest/CodeAgon2016/a.out
-HackerRank/Algorithms/Warmup/a.out
-HackerRank/Algorithms/Graph Theory/a.out
-GoogleJamAPACnMore/PracticeRoundAPAC2017/a.out
-Codechef/Practice/a.out
-Codechef/SeptChallenge2016/a.out
-HackerRank/Contest/WorldCodeSprint7/a.out
-HackerRank/Contest/WeekOfCode23/a.out
-HackerRank/Algorithms/Constructive Algorithms/a.out
-
 # test case files
 *.in
 *.in.*
